@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+
+class PizzaParlor {
+    int M; // maximum number of orders
+    int order_counter; // count of orders placed
+    std::vector<int> order_queue; // circular queue to store orders
+
+public:
+    PizzaParlor(int M) : M(M), order_counter(0), order_queue(M) {}
+
+    void place_order(int order) {
+        if (order_counter == M) {
+            std::cout << "Pizza parlor has already accepted maximum orders (" << M << ").\n";
+            return;
+        }
+        order_queue[order_counter % M] = order;
+        ++order_counter;
+        std::cout << "Order " << order << " has been placed.\n";
+    }
+
+    void serve_orders() {
+        for (int i = 0; i < order_counter; ++i) {
+            std::cout << "Order " << order_queue[i % M] << " has been served.\n";
+        }
+        order_counter = 0; // reset the order counter
+    }
+};
+
+int main() {
+    PizzaParlor parlor(5);
+
+    // Place orders
+    parlor.place_order(1);
+    parlor.place_order(2);
+    parlor.place_order(3);
+    parlor.place_order(4);
+    parlor.place_order(5);
+    parlor.place_order(6); // parlor is full
+
+    // Serve orders
+    parlor.serve_orders();
+
+    return 0;
+}
