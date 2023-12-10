@@ -1,0 +1,55 @@
+#include <iostream>
+#include <stack>
+#include <algorithm>
+
+// Function to reverse string using stack
+void reverse_string(std::string str) {
+    std::stack<char> stack;
+
+    for (int i = 0; i < str.length(); i++) {
+        stack.push(str[i]);
+    }
+
+    for (int i = 0; i < str.length(); i++) {
+        std::cout << stack.top();
+        stack.pop();
+    }
+
+    std::cout << std::endl;
+}
+
+// Function to check whether string is palindrome or not
+bool is_palindrome(std::string str) {
+    int start = 0;
+    int end = str.length() - 1;
+
+    while (start < end) {
+        if (str[start] != str[end]) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+
+    return true;
+}
+
+int main() {
+    std::string str = "madam";
+    std::cout << "Original String: " << str << std::endl;
+
+    // Remove all spaces and convert string to lowercase
+    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+
+    std::cout << "Reversed String: ";
+    reverse_string(str);
+
+    if (is_palindrome(str)) {
+        std::cout << "The string is a palindrome." << std::endl;
+    } else {
+        std::cout << "The string is not a palindrome." << std::endl;
+    }
+
+    return 0;
+}
