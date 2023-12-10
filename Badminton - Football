@@ -1,0 +1,39 @@
+# Initialize group A, B, and C students
+cricket = ['Rushant', 'Sonu', 'Adi', 'Surbhi', 'Aku']
+badminton = ['Rushant', 'Michael','Sonu', 'Sarah', 'Zach']
+football = ['Adi', 'Aiden', 'Alex', 'Ava', 'Ellie']
+
+
+# Function to calculate union of two lists
+def union(lst1, lst2):
+    return lst1 + [i for i in lst2 if i not in lst1]
+
+
+# Function to calculate intersection of two lists
+def intersection(lst1, lst2):
+    return [i for i in lst1 if i in lst2]
+
+
+# Function to calculate difference of two lists
+def difference(lst1, lst2):
+    return [i for i in lst1 if i not in lst2]
+
+
+# Compute the students who play both cricket and badminton
+play_both = intersection(cricket, badminton)
+print("1) List of students who play both cricket and badminton: ", play_both)
+
+
+# Compute the students who play either cricket or badminton but not both
+play_either = union(difference(cricket, badminton), difference(badminton, cricket))
+print("2) List of students who play either cricket or badminton but not both: ", play_either)
+
+
+# Compute the number of students who play neither cricket nor badminton
+play_neither = difference(union(cricket, badminton), intersection(cricket, badminton))
+print("3) Number of students who play neither cricket nor badminton: ", len(play_neither))
+
+
+# Compute the number of students who play cricket and football but not badminton
+play_cf = intersection(cricket, football)
+print("4) Number of students who play cricket and football but not badminton: ", len(play_cf))
