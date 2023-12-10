@@ -1,0 +1,140 @@
+#include<iostream>
+using namespace std;
+
+struct Member {
+    int PRN;
+    string Name;
+    Member *next;
+};
+
+// To initialize a new linked list
+Member *init_member() {
+    return NULL;
+}
+
+// To add a new member at the end of the linked list
+Member *add_member(Member *head, int PRN, string Name) {
+    Member *new_member = new Member;
+    new_member->PRN = PRN;
+    new_member->Name = Name;
+    new_member->next = NULL;
+
+    if (head == NULL) {
+        head = new_member;
+        return head;
+    }
+
+    Member *temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    temp->next = new_member;
+    return head;
+}
+
+// To delete a member from the linked list
+Member *delete_member(Member *head, int PRN) {
+    if (head == NULL) {
+        return NULL;
+    }
+
+    if (head->PRN == PRN) {
+        Member *temp = head;
+        head = head->next;
+        delete temp;
+        return head;
+    }
+
+    Member *prev = NULL;
+    Member *curr = head;
+
+    while (curr != NULL && curr->PRN != PRN) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (curr == NULL) {
+        return head;
+    }
+
+    prev->next = curr->next;
+    delete curr;
+    return head;
+}
+
+// To count the total number of members in the linked list
+int count_members(Member *head) {
+    int count = 0;
+    Member *temp = head;
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+// To display the members of the linked list
+void display_members(Member *head) {
+    Member *temp = head;
+    while (temp != NULL) {
+        cout << "PRN: " << temp->PRN << " Name: " << temp->Name << endl;
+        temp = temp->next;
+    }
+}
+
+// To concatenate two linked lists
+Member *concatenate_lists(Member *head1, Member *head2) {
+    if (head1 == NULL) {
+        return head2;
+    }
+
+    if (head2 == NULL) {
+        return head1;
+    }
+
+    Member *temp = head1;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    temp->next = head2;
+    return head1;
+}
+
+int main() {
+    Member *head1 = init_member();
+    Member *head2 = init_member();
+
+    // Adding members
+    head1 = add_member(head1, 101, "Alice");
+    head1 = add_member(head1, 102, "Bob");
+    head2 = add_member(head2, 103, "Charlie");
+    head2 = add_member(head2, 104, "David");
+
+    // Displaying members
+    cout << "Members of Division 1:" << endl;
+    display_members(head1);
+    cout << "Members of Division 2:" << endl;
+    display_members(head2);
+
+    // Concatenating the two lists
+    Member *head = concatenate_lists(head1, head2);
+
+    // Displaying the concatenated list
+    cout << "Members of Concatenated List:" << endl;
+    display_members(head);
+
+    // Counting the total number of members
+    int total_members = count_members(head);
+    cout << "Total number of members: " << total_members << endl;
+
+    // Deleting a member
+    head = delete_member(head, 102);
+
+    // Displaying the updated list
+    cout << "Members of Updated List:" << endl;
+    display_members(head);
+
+    return 0;
+}
