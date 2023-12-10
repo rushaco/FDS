@@ -1,0 +1,49 @@
+# Initializing lists for scores
+subjects = ['Fundamentals of Data Structure']
+marks = {subject: [] for subject in subjects}
+
+# Function to enter marks
+def enter_marks():
+    n = int(input("Enter the number of students: "))
+    for i in range(n):
+        student_marks = list(map(int, input(f"Enter marks for student {i+1}: ").split()))
+        marks[subjects[0]].extend(student_marks)
+
+# Function to compute average score
+def compute_average():
+    total_marks = sum(marks[subjects[0]])
+    average = total_marks / len(marks[subjects[0]])
+    return average
+
+# Function to compute highest and lowest scores
+def compute_highest_lowest():
+    highest = max(marks[subjects[0]])
+    lowest = min(marks[subjects[0]])
+    return highest, lowest
+
+# Function to compute count of absent students
+def compute_absent_students():
+    absent_students = list(map(int, input("Enter marks for absent students: ").split()))
+    count = len(absent_students)
+    return count
+
+# Function to compute mark with highest frequency
+def compute_mark_frequency():
+    from collections import Counter
+    counter = Counter(marks[subjects[0]])
+    most_common_mark = counter.most_common(1)[0][0]
+    return most_common_mark
+
+# Function to display the result
+def display_result():
+    print(f"Average score of the class: {compute_average()}")
+    print(f"Highest score and lowest score of the class: {compute_highest_lowest()}")
+    print(f"Count of students who were absent for the test: {compute_absent_students()}")
+    print(f"Display mark with highest frequency: {compute_mark_frequency()}")
+
+# Main program
+def main():
+    enter_marks()
+    display_result()
+
+main()
