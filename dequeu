@@ -1,0 +1,54 @@
+#include <iostream>
+#include <deque>
+
+// Function to add element to the front of the deque
+void add_front(std::deque<int>& dq, int value) {
+    dq.push_front(value);
+    std::cout << "Added " << value << " to the front of the deque.\n";
+}
+
+// Function to add element to the back of the deque
+void add_back(std::deque<int>& dq, int value) {
+    dq.push_back(value);
+    std::cout << "Added " << value << " to the back of the deque.\n";
+}
+
+// Function to delete element from the front of the deque
+void delete_front(std::deque<int>& dq) {
+    if (dq.empty()) {
+        std::cout << "Deque is empty.\n";
+    } else {
+        int deleted_value = dq.front();
+        dq.pop_front();
+        std::cout << "Deleted " << deleted_value << " from the front of the deque.\n";
+    }
+}
+
+// Function to delete element from the back of the deque
+void delete_back(std::deque<int>& dq) {
+    if (dq.empty()) {
+        std::cout << "Deque is empty.\n";
+    } else {
+        int deleted_value = dq.back();
+        dq.pop_back();
+        std::cout << "Deleted " << deleted_value << " from the back of the deque.\n";
+    }
+}
+
+int main() {
+    std::deque<int> dq;
+
+    // Add elements to the deque
+    add_front(dq, 1);
+    add_back(dq, 2);
+    add_front(dq, 3);
+    add_back(dq, 4);
+
+    // Delete elements from the deque
+    delete_front(dq);
+    delete_back(dq);
+    delete_front(dq);
+    delete_back(dq);
+
+    return 0;
+}
