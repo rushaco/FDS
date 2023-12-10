@@ -1,0 +1,46 @@
+class Book:
+    def __init__(self, name, cost):
+        self.name = name
+        self.cost = cost
+
+    def __eq__(self, other):
+        return self.name == other.name and self.cost == other.cost
+
+    def __repr__(self):
+        return f"{self.name}: {self.cost}"
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, name, cost):
+        self.books.append(Book(name, cost))
+
+    def remove_duplicates(self):
+        self.books = list(set(self.books))
+
+    def display_books(self):
+        sorted_books = sorted(self.books, key=lambda x: x.cost)
+        for book in sorted_books:
+            print(book)
+
+    def count_books_with_high_cost(self):
+        return len([book for book in self.books if book.cost > 500])
+
+    def copy_books_with_low_cost(self):
+        low_cost_books = [book for book in self.books if book.cost < 500]
+        return low_cost_books
+
+# Example usage
+library = Library()
+library.add_book("Book1", 400)
+library.add_book("Book2", 500)
+library.add_book("Book3", 600)
+library.add_book("Book4", 700)
+library.add_book("Book1", 400)
+library.add_book("Book1", 300)
+
+library.remove_duplicates()
+library.display_books()
+print("Number of books with cost more than 500:", library.count_books_with_high_cost())
+print("Books with cost less than 500:", library.copy_books_with_low_cost())
