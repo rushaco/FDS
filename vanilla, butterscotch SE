@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+
+struct Student {
+    int id;
+    string name;
+    bool likesVanilla;
+    bool likesButterscotch;
+    Student *next;
+};
+
+// To initialize a new linked list
+Student *init_list() {
+    return NULL;
+}
+
+// To add a new student at the end of the linked list
+Student *add_student(Student *head, int id, string name, bool likesVanilla, bool likesButterscotch) {
+    Student *new_student = new Student;
+    new_student->id = id;
+    new_student->name = name;
+    new_student->likesVanilla = likesVanilla;
+    new_student->likesButterscotch = likesButterscotch;
+    new_student->next = NULL;
+
+    if (head == NULL) {
+        head = new_student;
+        return head;
+    }
+
+    Student *temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    temp->next = new_student;
+    return head;
+}
+
+// To display the students of the linked list
+void display_students(Student *head) {
+    Student *temp = head;
+    while (temp != NULL) {
+        cout << "ID: " << temp->id << " Name: " << temp->name;
+        cout << " Likes Vanilla: " << (temp->likesVanilla ? "Yes" : "No");
+        cout << " Likes Butterscotch: " << (temp->likesButterscotch ? "Yes" : "No") << endl;
+        temp = temp->next;
+    }
+}
+
+int main() {
+    Student *headA = init_list();
+    Student *headB = init_list();
+
+    // Adding students
+    headA = add_student(headA, 101, "Alice", true, false);
+    headA = add_student(headA, 102, "Bob", false, true);
+    headA = add_student(headA, 103, "Charlie", true, true);
+    headB = add_student(headB, 104, "David", false, false);
+    headB = add_student(headB, 105, "Eva", true, false);
+
+    // Displaying students
+    cout << "Set A of Students:" << endl;
+    display_students(headA);
+    cout << "Set B of Students:" << endl;
+    display_students(headB);
+
+    return 0;
+}
