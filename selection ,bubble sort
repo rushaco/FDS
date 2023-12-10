@@ -1,0 +1,35 @@
+# Selection Sort
+def selection_sort(array):
+    for i in range(len(array)):
+        min_index = i
+        for j in range(i+1, len(array)):
+            if array[j] < array[min_index]:
+                min_index = j
+        array[i], array[min_index] = array[min_index], array[i]
+
+# Bubble Sort
+def bubble_sort(array):
+    n = len(array)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if array[j] > array[j+1]:
+                array[j], array[j+1] = array[j+1], array[j]
+
+def display_top_five(array):
+    sorted_array = sorted(array, reverse=True)
+    for i in range(5):
+        if i < len(sorted_array):
+            print(f"Rank {i+1}: {sorted_array[i]}%")
+        else:
+            break
+
+# Example usage
+first_year_percentages = [90.0, 70.0, 85.0, 65.0, 92.0, 88.0, 75.0, 60.0, 55.0, 45.0]
+
+selection_sort(first_year_percentages)
+print("Top five scores after Selection Sort:")
+display_top_five(first_year_percentages)
+
+bubble_sort(first_year_percentages)
+print("Top five scores after Bubble Sort:")
+display_top_five(first_year_percentages)
