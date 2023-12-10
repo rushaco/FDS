@@ -1,0 +1,45 @@
+#include <iostream>
+#include <queue>
+
+// Structure for job
+struct Job {
+    int id;
+    int processing_time;
+};
+
+// Function to add job to queue
+void add_job(std::queue<Job>& job_queue, int job_id, int processing_time) {
+    Job new_job;
+    new_job.id = job_id;
+    new_job.processing_time = processing_time;
+    job_queue.push(new_job);
+    std::cout << "Job " << job_id << " added to queue.\n";
+}
+
+// Function to delete job from queue
+void delete_job(std::queue<Job>& job_queue) {
+    if (job_queue.empty()) {
+        std::cout << "Job queue is empty.\n";
+    } else {
+        Job deleted_job = job_queue.front();
+        job_queue.pop();
+        std::cout << "Job " << deleted_job.id << " deleted from queue.\n";
+    }
+}
+
+int main() {
+    std::queue<Job> job_queue;
+
+    // Add jobs to queue
+    add_job(job_queue, 1, 3);
+    add_job(job_queue, 2, 5);
+    add_job(job_queue, 3, 7);
+
+    // Delete jobs from queue
+    delete_job(job_queue);
+    delete_job(job_queue);
+    delete_job(job_queue);
+    delete_job(job_queue);
+
+    return 0;
+}
